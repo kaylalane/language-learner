@@ -2,7 +2,6 @@
 export default {
   content: [
     "./src/**/*.{html,jsx,js}",
-    "./.{html}",
     "./node_modules/flowbite/**/*.js",
     "./node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
