@@ -1,7 +1,7 @@
 export const resources = [
   {
     title: "Clozemaster",
-    description: "",
+    description: "Gamified language learning through mass exposure to vocabulary in context.",
     languages: ["Spanish", "France", "Dutch", "Japanese", "Korean", "Italian", 
                 "Mandarin", "Portuguese", "Arabic", "Tagalog", "Swedish", "Turkish", 
                 "Norwegian", "Greek", "Latin", "Cantonese", "Persian", "Finnish", "Romanian", 
@@ -17,7 +17,7 @@ export const resources = [
   },
   {
     title: "Conversation Exchange",
-    description: "",
+    description: "Find a language partner based on language, area, age and proficiency.",
     languages: ["All"],
     types: ["Language Exchange"],
     link: "https://www.conversationexchange.com/",
@@ -25,7 +25,7 @@ export const resources = [
   },
   {
     title: "Duolingo",
-    description: "",
+    description: "An American educational technology company which produces learning apps and provides language certification",
     languages: ["All"],
     types: ["Trivia Game"],
     link: "https://www.duolingo.com/learn",
@@ -33,7 +33,7 @@ export const resources = [
   },
   {
     title: "Howtostudykorean",
-    description: "",
+    description: "The purpose of this website is to provide Korean learners with a one-stop resource for learning Korean. We strive to provide the most detailed, accurate and clear explanations at every step of the way – from learning how to read all the way to advanced grammar.",
     languages: ["Korean"],
     types: ["Lessons"],
     link: "https://www.howtostudykorean.com/",
@@ -41,7 +41,7 @@ export const resources = [
   },
   {
     title: "SpanishDict",
-    description: "",
+    description: "SpanishDict is a Spanish-English reference and learning website and mobile application. The website and mobile application feature a Spanish-English dictionary and translator, verb conjugation tables, pronunciation videos, and language lessons.",
     languages: ["Spanish"],
     types: ["Translator"],
     link: "https://www.spanishdict.com/",
@@ -49,7 +49,7 @@ export const resources = [
   },
   {
     title: "StudySpanish",
-    description: "",
+    description: "Learn Spanish with free online tutorials with audio, cultural notes, grammar, vocabulary, verbs drills, and links to helpful sites",
     languages: ["Spanish"],
     types: ["Lessons"],
     link: "https://studyspanish.com/",
@@ -58,7 +58,7 @@ export const resources = [
   },
   {
     title: "Coursera Korean",
-    description: "",
+    description: "This is an elementary-level Korean language course, consisting of 5 lessons with 4 units, and covers 4 skills: reading, writing, listening and speaking. ",
     languages: ["Korean"],
     types: ["Lessons"],
     link: "https://www.coursera.org/learn/learn-korean",
@@ -66,7 +66,7 @@ export const resources = [
   },
   {
     title: "Korean Wiki",
-    description: "",
+    description: "This project is a collaborative effort to unify knowledge on the Korean language and to make the information easily accessible and relevant to anyone.",
     languages: ["Korean"],
     types: ["Lessons"],
     link: "https://www.koreanwikiproject.com/wiki/index.php?title=Learn_hangeul",
@@ -74,7 +74,7 @@ export const resources = [
   },
   {
     title: "Anki",
-    description: "",
+    description: "A free and open-source flashcard program using spaced repetition, a technique from cognitive science for memorization. ",
     languages: ["All"],
     types: ["Lessons"],
     link: "https://apps.ankiweb.net/",
@@ -83,7 +83,7 @@ export const resources = [
   },
   {
     title: "Reddit",
-    description: "",
+    description: "/languagelearning is a subreddit for language learner.",
     languages: ["All"],
     types: ["Forum"],
     link: "https://www.reddit.com/r/languagelearning/",
@@ -101,7 +101,7 @@ export const resources = [
   },
   {
     title: "LexiLogos",
-    description: "Multilingual keyboard",
+    description: "A multilingual keyboard that has a wide variety of languages.",
     languages: ["All"],
     types: ["Keyboard"],
     link: "https://www.lexilogos.com/keyboard/index.htm",
@@ -124,6 +124,23 @@ export const resources = [
     types: ["Reference"],
     link: "https://chinese.yabla.com/chinese-pinyin-chart.php",
     cost:"",
+    costDetails:""
+  },
+  {
+    title: "WordReference",
+    description: "An online translation dictionary that supports Spanish, French, Italian, Portuguese, Catalan, Dutch, Polish, Romanian, etc.",
+    languages: ["Spanish", "French", "Dutch", "Russian", "Mandarin", "Korean", "Arabic"],
+    types: [""],
+    link: "https://www.wordreference.com/",
+    cost:"Free",
+    costDetails:""
+  },{
+    title: "Almaany",
+    description: "An Arabic dictionary with translations for English, Spanish, Portugues, French, Turkish, Indonesian and Dutch.",
+    languages: ["Arabic"],
+    types: ["Dictionary"],
+    link: "https://www.almaany.com/",
+    cost:"Free",
     costDetails:""
   }
 ]
