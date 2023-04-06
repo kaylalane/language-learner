@@ -4,15 +4,10 @@ import RedditPost from "./RedditPost";
 export default function Reddit() {
   return (
     <section className="reddit">
-      <div className="posts">
-        <h2 className="text-2xl">Recent Reddit Posts on Language Learning</h2>
-        <RedditPost id={3} />
-        <RedditPost id={4} />
-        <RedditPost id={5} />
-      </div>
+     
       <aside className="subreddits">
         <h2 className="text-2xl">Subreddits by Language</h2>
-        <ul className="grid grid-cols-2 gap-y-2">
+        <ul className="links text-sm">
           <li>Arabic</li>
           <li>
             <a href="https://www.reddit.com/r/learn_arabic/" target="_blank">/learn_arabic</a>
@@ -71,6 +66,12 @@ export default function Reddit() {
           </li>
         </ul>
       </aside>
+      <div className="posts">
+        <h2 className="text-2xl">Recent Reddit Posts on Language Learning</h2>
+        <RedditPost id={3} />
+        <RedditPost id={4} />
+        <RedditPost id={5} />
+      </div>
     </section>
   );
 }

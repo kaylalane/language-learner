@@ -58,6 +58,7 @@ const SearchParams = () => {
                 link={filteredResource.link}
                 types={filteredResource.types}
                 cost={filteredResource.cost}
+                features={filteredResource.features}
               />
             ))}
         </div>

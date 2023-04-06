@@ -51,8 +51,24 @@
   overflow: scroll;
 
 
-  .features { 
+  .information { 
     padding: 1rem;
+  }
+
+  .type, .features {
+    padding-top: 1rem;
+  }
+
+  .type {
+    padding-top: 1rem;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+  }
+
+  .features ul{
+    list-style-type:disc;
+    padding-left: 1rem;
   }
 
   ul {
@@ -60,8 +76,8 @@
     padding: 0;
     display: flex;
     gap: .5rem;
-    list-style-type: none;
     font-size: small;
+
   }
   
 }
@@ -78,6 +94,12 @@
   display: flex;
   gap: 1rem;
   flex-flow:column wrap;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: 70px 50px;
+  column-gap: 10px;
 }
 
 .reddit-post {
