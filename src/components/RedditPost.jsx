@@ -20,8 +20,8 @@ export default function RedditPost(props) {
 
   async function getPost() {
     try {
-      const res = await fetch("http://www.reddit.com/r/languagelearning/.json");
-
+      const res = await fetch("https://www.reddit.com/r/languagelearning/.json");
+      
       if (!res.ok) {
         throw new Error("Network response was not OK");
       }
