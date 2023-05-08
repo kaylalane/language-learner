@@ -1,49 +1,61 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 export default function RedditPost(props) {
   const [recentPost, setRecentPost] = useState({
     title: "",
     author: "",
-    selftext:"",
-    link:""
+    selftext: "",
+    link: "",
   });
-  
+
   useEffect(() => {
     getPost();
 
-    const interval=setInterval(()=>{
-     getPost()
-      },10000)
- 
- 
-     return()=>clearInterval(interval)
- 
+    const interval = setInterval(() => {
+      getPost();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function getPost() {
+    try {
+      const res = await fetch("http://www.reddit.com/r/languagelearning/.json");
 
-    const res = await fetch(
-      'https://www.reddit.com/r/languagelearning/.json'
-    );
-    
-    const j = await res.json();
-    setRecentPost({
-      title:j.data.children[props.id].data.title,
-      author:j.data.children[props.id].data.author_fullname,
-      selftext:j.data.children[props.id].data.selftext,
-      link: j.data.children[props.id].data.permalink
-    })
-    
+      if (!res.ok) {
+        throw new Error("Network response was not OK");
+      }
+
+      const j = await res.json();
+      setRecentPost({
+        title: j.data.children[props.id].data.title,
+        author: j.data.children[props.id].data.author_fullname,
+        selftext: j.data.children[props.id].data.selftext,
+        link: j.data.children[props.id].data.permalink,
+        picture: j.data.children[props.id].data.url_overridden_by_dest,
+      });
+    } catch (error) {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    }
   }
 
   return (
-      <article className="reddit-post">
-        <a href={"https://www.reddit.com" + recentPost.link} target={"_blank"}>
-          <h3 className="text-xl font-extrabold">{recentPost.title}</h3>
-        </a>
-        <p className="italic">{recentPost.author}</p>
-        <p>{recentPost.selftext}</p>
-      </article>
-  );
-};
+    <a
+      href={"https://www.reddit.com" + recentPost.link}
+      target={"_blank"}
+      className="reddit-post p-4 w-10/12 max-w-[800px] bg-primaryButton/5 rounded-md"
+    >
+      <h3 className="text-xl font-extrabold">{recentPost.title}</h3>
 
+      <p className="text-base italic">Posted by u/{recentPost.author}</p>
+      <p className="text-sm">{recentPost.selftext}</p>
+      {recentPost.picture && 
+        <img src={recentPost.picture} alt={"r/languagelearning - " + recentPost.title}/>
+        
+        }
+    </a>
+  );
+}

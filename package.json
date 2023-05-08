@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
     "@tanstack/react-query": "^4.28.0",
     "bootstrap": "^5.2.3",
+    "emailjs-com": "^3.2.0",
     "eslint": "^8.36.0",
     "flowbite": "^1.6.4",
     "flowbite-react": "^0.4.2",
@@ -20,6 +22,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-loading": "^2.0.3",
     "sass": "^1.60.0"
   },

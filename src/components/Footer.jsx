@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer>
-      <p>&copy; Kayla 2023</p>
+    <footer className="flex justify-center py-6">
+      <p className="text-sm">&copy; 2023</p>
     </footer>
   )
 }

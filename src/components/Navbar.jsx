@@ -1,15 +1,35 @@
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
+import { init, sendForm } from "emailjs-com";
+import { useForm } from "react-hook-form";
+init("Oz4Q-rOGmPUD7nUq-");
 
 function MyModal() {
-  let [isOpen, setIsOpen] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    closeModal();
+    sendForm("default_service", "template_ncz93v9", "#contact-form").then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+  };
+
+  let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true)
+    setIsOpen(true);
   }
 
   return (
@@ -18,7 +38,7 @@ function MyModal() {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className="rounded-md bg-primaryButton px-4 py-2 text-sm font-medium text-white"
         >
           Suggestions?
         </button>
@@ -57,18 +77,48 @@ function MyModal() {
                     Submit Your Feedback
                   </Dialog.Title>
                   <div className="mt-2">
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScXseDFjpH-fJWo51zIVR_Sl8oIYs6tSgG5YwMt52Ft9LB2Jw/viewform?embedded=true" width="640" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                    <form id="contact-form" onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col gap-4">
+                      {/* include validation with required or other standard HTML validation rules */}
+                      <input
+                        className="bg-white border-black border-2 p-2  rounded-md focus-visible:outline-[#c5c6c8]"
+                        style={
+                          errors.nameRequired && { border: "2px solid red" }
+                        }
+                        placeholder="Name"
+                        {...register("nameRequired", { required: true })}
+                      />
+                      
+                      {/* errors will return when field validation fails  */}
+                      <input
+                        className="bg-white border-black border-2 p-2 rounded-md focus:border-[#c5c6c8] focus-visible:border=[#c5c6c8] focus-visible:outline-[#c5c6c8]"
+                        style={errors.mail && { border: "2px solid red" }}
+                        placeholder="Email"
+                        {...register("mail", {
+                          required: "Email Address is required",
+                        })}
+                        aria-invalid={errors.mail ? "true" : "false"}
+                      />
+                      
+                      <textarea
+                        className="bg-white border-black border-2 h-32 p-2 rounded-md focus:ring-0 focus:border-[#c5c6c8] focus-visible:border-[#c5c6c8] focus:outline focus-visible:outline-offset-0"
+                        style={
+                          errors.messageRequired && { border: "2px solid red" }
+                        }
+                        placeholder="Send me a message!"
+                        {...register("messageRequired", { required: true })}
+                        aria-invalid={errors.mail ? "true" : "false"}
+                      />
+
+                      <input
+                        type="submit"
+                        role="button"
+                        className="button w-full p-2 text-white border-none bg-primaryButton rounded-md focus-visible:outline-primaryButton"
+                        aria-label="Submit feedback form"
+                      />
+                    </form>
                   </div>
 
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
@@ -76,13 +126,13 @@ function MyModal() {
         </Dialog>
       </Transition>
     </>
-  )
+  );
 }
 
 export default function Navbar() {
   return (
-    <nav>
-      <h1>Language Learning Resources</h1>
+    <nav className="flex py-4 justify-between">
+      <h1 className="text-2xl">Polyglot Resources</h1>
       <MyModal />
     </nav>
   );

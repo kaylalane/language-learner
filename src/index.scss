@@ -8,18 +8,22 @@
   font-weight: 400;
   margin: 0;
   padding: 0;
-  
+
+  --Primary: #0b0c12;
+  --Secondary: #dedede;
+  --Primary-Button: #1a2930;
+  --Secondary-Button: #e3e3e3;
+  --Accent: #f7ce40;
 
   color-scheme: light dark;
-  color: #F9F8F8;
-  background-color: #0D1F38;
+  color: black;
+  background-color: white;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  
 }
 
 body {
@@ -28,89 +32,4 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
-h2 {
-  font-size: 18pt;
-}
-
-h3 {
-  font-size: 12pt;
-  font-weight: 800;
-}
-
-h4 {
-  font-size: 10pt;
-  font-weight: 700;
-}
-
-
-p {
-  font-size: 10pt;
-}
-
-a {
-  text-decoration: underline 0.15em rgba(0, 0, 0, 1);
-  text-underline-offset: 0.2em;
-  transition: text-decoration-color 300ms, text-underline-offset 300ms;
-
-  &:hover {
-    text-decoration-color: rgba(0, 0, 0, 1);
-    text-underline-offset: 0.4em;
-  }
-}
-
-
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 70px;
-
-  h1 {
-    font-size: 2rem;
-    margin-right: auto;
-
-  }
-
-  .tabs {
-    justify-content: flex-end;
-  }
-}
-
-
-
-.subreddits a {
-  text-decoration: underline 0.15em rgba(255, 244, 58, 1);
-
-  .subreddits a:hover{
-    text-decoration-color: rgba(255, 244, 58, 1);
-    text-underline-offset: 0.4em;
-  }
-}
-
-
-footer {
-  display: flex;
-  height: 70px;
-  justify-content: center;
-}
-
-
-@media (min-width: 850px ){
-  .reddit {
-    flex-flow: row;
-  }
-
-  .posts{
-    flex-basis: 80%;
-    padding-left: 1rem;
-  }
-
-  .subreddits {
-    flex-basis: 20%;
-
-  }
-  
-}
-
 
