@@ -7,7 +7,7 @@ export default function RedditPost(props) {
     selftext: "",
     link: "",
   });
-
+  
   useEffect(() => {
     getPost();
 
@@ -41,19 +41,20 @@ export default function RedditPost(props) {
       );
     }
   }
-
+  
   return (
     <a
       href={"https://www.reddit.com" + recentPost.link}
       target={"_blank"}
-      className="reddit-post p-4 w-10/12 max-w-[800px] bg-primaryButton/5 rounded-md"
+      rel="noreferrer"
+      className="p-4 w-10/12 max-w-[800px] bg-primary/5 rounded-md "
     >
       <h3 className="text-xl font-extrabold">{recentPost.title}</h3>
 
       <p className="text-base italic">Posted by u/{recentPost.author}</p>
       <p className="text-sm">{recentPost.selftext}</p>
       {recentPost.picture && 
-        <img src={recentPost.picture} alt={"r/languagelearning - " + recentPost.title}/>
+        <img src={recentPost.picture} alt={`r/languagelearning - ${recentPost.title}`}/>
         
         }
     </a>

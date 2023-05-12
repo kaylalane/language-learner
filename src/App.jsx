@@ -1,13 +1,16 @@
-import { lazy, useEffect, useState } from "react";
-import "./App.scss";
-import Navbar from "./components/Navbar";
+import { useState } from "react";
 import Footer from "./components/Footer";
 import RedditPost from "./components/RedditPost";
 import { resources } from "./components/data";
 import Resource from "./components/Resource";
+import Dropdown from "./components/Dropdown";
+import { init, sendForm } from "emailjs-com";
+import { useForm } from "react-hook-form";
+init("Oz4Q-rOGmPUD7nUq-");
+
 //const RedditPost = lazy(() => import("./SearchParams"));
 const languages = [
-  "All",
+  "Language",
   "Arabic",
   "Dutch",
   "English",
@@ -16,6 +19,21 @@ const languages = [
   "Russian",
   "Spanish",
   "Swahili",
+];
+
+const types = [
+  "All",
+  "Dictionary",
+  "Flashcards",
+  "Forum",
+  "Keyboard",
+  "Language Exchange",
+  "Lessons",
+  "Podcasts",
+  "Reference",
+  "Translator",
+  "Trivia Game",
+  "Quiz",
 ];
 
 const redditLinks = [
@@ -62,44 +80,80 @@ const redditLinks = [
 ];
 
 function App() {
-  const [language, setLanguage] = useState("All");
+  const [languageFilter, setLanguageFilter] = useState("All");
   const [results, setResults] = useState(resources);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    sendForm("default_service", "template_ncz93v9", "#contact-form").then(
+      function (response) {
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      function (error) {
+        console.log("FAILED...", error);
+      }
+    );
+  };
 
-  function handleOnChange(prop) {
-    console.log("handle change " + prop);
-    setLanguage(prop);
+  function handleFilterChange(prop) {
+    setLanguageFilter(prop);
   }
 
   return (
     <div className="App">
-      <Navbar />
+      <section className="  h-screen w-screen flex flex-col sm:flex-row items-center justify-center gap-4  bg-primary text-bg">
+        <div className="basis-1/2 text-base px-8 sm:p-0">
+          <h1 className="text-2xl font-bold ">Polyglot Resources</h1>
+          <p className="py-2">
+            Welcome to Polyglot Resources, your one-stop destination for
+            language resources!
+          </p>
+          <p className="py-2">
+            Our website features a variety of resources, including online
+            courses, textbooks, podcasts, language exchange platforms, and more.
+          </p>
+          <p className="py-2">
+            Most of these resources come from the hard work of the Reddit
+            language learning community, and this website only compiles thier
+            knowledge. Check out the reddit language learning thread{" "}
+            <a
+              href="https://www.reddit.com/r/languagelearning/"
+              alt="Reddit's Language Learning Thread"
+              className="text-accent"
+              target="_blank"
+              rel="noreferrer"
+            >
+              here!
+            </a>
+          </p>
+        </div>
+        <div className=" basis:none sm:basis-1/4 invisible sm:visible">
+          <img src="/language.svg" className=" w-full" />
+        </div>
+      </section>
 
-      <section className="flex flex-col sm:flex-row items">
-        <div className="form">
-          <h2 className="text-xl">Languages</h2>
-          <div className="flex flex-row flex-wrap sm:flex-col gap-4 py-2 items-start">
-            {languages.map((lang) => (
-              <button
-                className="text-base hover:text-primary"
-                id={lang}
-                key={lang}
-                value={lang}
-                onClick={(e) => {
-                  handleOnChange(e.target.value);
-                }}
-              >
-                {lang}
-              </button>
-            ))}
+      <section className="min-h-screen flex flex-col justify-center">
+        <div className="flex p-8 justify-between">
+          <h2 className="text-2xl text-primary font-bold">
+            Polyglot Resources
+          </h2>
+          <div className="flex gap-4">
+            <Dropdown
+              defaultValue={languages[0]}
+              list={languages}
+              changeItem={handleFilterChange}
+            />
           </div>
         </div>
-
         <div className="flex flex-wrap gap-2 justify-center">
           {results
             .filter(
-              (lang) =>
-                lang.languages.includes(language) ||
-                lang.languages.includes("All")
+              (resource) =>
+                resource.languages.includes(languageFilter) ||
+                resource.languages.includes("All")
             )
             .map((filteredResource) => (
               <Resource
@@ -108,46 +162,66 @@ function App() {
                 description={filteredResource.description}
                 link={filteredResource.link}
                 types={filteredResource.types}
-                cost={filteredResource.cost}
-                features={filteredResource.features}
               />
             ))}
         </div>
       </section>
 
-      <section
-        id="reddit"
-        className="py-6 flex flex-col md:flex-row items-center md:items-start gap-4"
-      >
-        <aside className="subreddits">
-          <h2 className="text-2xl pb-4">Subreddits</h2>
-          <ul className="grid gap-2 text-base">
-            {redditLinks.map((subreddit) => (
-              <li className="grid grid-cols-2 text-base" key={subreddit.title}>
-                {subreddit.title}{" "}
-                <a
-                  href={subreddit.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="underline decoration-solid	 decoration-2 decoration-accent transition ease-in-out delay-300 duration-300	underline-offset-2 hover:underline-offset-4"
-                >
-                  {subreddit.linkTitle}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
-
-        <div className="">
-          <h2 className="text-2xl text-center pb-4">
-            Recent Reddit Posts on r/languagelearning
-          </h2>
-          <div className="flex flex-col gap-4 items-center">
-            <RedditPost id={3} />
-            <RedditPost id={4} />
-            <RedditPost id={5} />
-          </div>
+      <section className=" p-8">
+        <h2 className="text-2xl text-center pb-4 font-extrabold">
+          Connect with the language community on Reddit!
+        </h2>
+        <div className=" flex flex-col items-center sm:items-start sm:flex-row gap-4 justify-center">
+          <RedditPost id={3} />
+          <RedditPost id={4} />
+          <RedditPost id={5} />
         </div>
+      </section>
+
+      <section className=" flex justify-center">
+        <form
+          id="contact-form"
+          onSubmit={handleSubmit(onSubmit)}
+          className="basis-3/4 flex flex-col justify-center max-w-3xl gap-4 text-base"
+        >
+          <h2 className="text-2xl text-center text-primary font-extrabold">
+            Suggestions?
+          </h2>
+          <div className=" flex gap-2">
+            {/* include validation with required or other standard HTML validation rules */}
+            <input
+              className="w-1/2 bg-white border-black border-2 p-2  rounded-md focus:border-accent focus-visible:border-accent focus:outline-none focus-visible:outline-none "
+              style={errors.nameRequired && { border: "2px solid red" }}
+              placeholder="Name"
+              {...register("nameRequired", { required: true })}
+            />
+
+            {/* errors will return when field validation fails  */}
+            <input
+              className="w-1/2 bg-white border-black border-2 p-2 rounded-md focus:border-accent focus-visible:border-accent focus:outline-none focus-visible:outline-none "
+              style={errors.mail && { border: "2px solid red" }}
+              placeholder="Email"
+              {...register("mail", {
+                required: "Email Address is required",
+              })}
+              aria-invalid={errors.mail ? "true" : "false"}
+            />
+          </div>
+          <textarea
+            className=" bg-white border-black border-2 p-2 rounded-md focus:ring-0 focus:border-accent focus-visible:border-accent focus:outline focus-visible:outline-offset-0"
+            style={errors.messageRequired && { border: "2px solid red" }}
+            placeholder="Send me a message!"
+            {...register("messageRequired", { required: true })}
+            aria-invalid={errors.mail ? "true" : "false"}
+          />
+
+          <input
+            type="submit"
+            role="button"
+            className="button w-full p-2 text-white border-none bg-primary rounded-md focus-visible:outline-primaryButton"
+            aria-label="Submit feedback form"
+          />
+        </form>
       </section>
 
       <Footer />
