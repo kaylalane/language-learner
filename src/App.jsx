@@ -117,7 +117,7 @@ function App() {
           </p>
           <p className="py-2">
             Most of these resources come from the hard work of the Reddit
-            language learning community, and this website only compiles thier
+            language learning community, and this website only compiles their
             knowledge. Check out the reddit language learning thread{" "}
             <a
               href="https://www.reddit.com/r/languagelearning/"
